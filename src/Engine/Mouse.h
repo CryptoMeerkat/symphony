@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Vector2.h"
+#include <glm/vec2.hpp>
 #include <iostream>
 
 namespace Symphony
@@ -11,6 +11,7 @@ namespace Symphony
         friend class SymphonyEngine;
         
     public:
+        //TO-DO: `MAX` could be removed and instead `MIDDLE` + 1 could be used
         enum Button { LEFT, RIGHT, MIDDLE, MAX };
 
         inline bool ButtonDown(Button b)
@@ -30,24 +31,24 @@ namespace Symphony
 
         void Update(float deltaTime);//  int currentX, int currentY, int deltaX, int deltaY);
 
-        inline void SetAbsolutePosition(Vector2 pos)
+        inline void SetAbsolutePosition(glm::vec2 pos)
         {
             absolutePosition = pos;
         }
 
-        inline Vector2 AbsolutePosition() const
+        inline glm::vec2 AbsolutePosition() const
         {
             return absolutePosition;
         }
 
-        inline Vector2 RelativePosition() const
+        inline glm::vec2 RelativePosition() const
         {
             return relativePosition;
         }
 
         inline void Clear()
         {
-            relativePosition.ToZero();
+            relativePosition = glm::vec2();
 
             //TO-DO: A memcpy might be useful in this case
             for (int i = 0; i < Button::MAX; ++i)
@@ -59,8 +60,7 @@ namespace Symphony
 
     protected:
         //Current mouse absolute position
-        Vector2 absolutePosition,
-            relativePosition;
+        glm::vec2 absolutePosition, relativePosition;
 
         bool buttonState[Button::MAX];
         bool buttonHoldState[Button::MAX];

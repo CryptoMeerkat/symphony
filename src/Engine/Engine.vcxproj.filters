@@ -27,15 +27,15 @@
       <UniqueIdentifier>{e5c7f9f1-5b93-4b5a-a002-19b4aa85e372}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Math">
-      <UniqueIdentifier>{0ca4da1a-c550-442f-a39c-1c33d04faf74}</UniqueIdentifier>
+    <Filter Include="GameObjects">
+      <UniqueIdentifier>{63513fcd-0552-4a73-9810-a25a2553d90f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Math\Header Files">
-      <UniqueIdentifier>{da4b1442-cf9a-457e-88ae-74643e8cb245}</UniqueIdentifier>
+    <Filter Include="GameObjects\Header Files">
+      <UniqueIdentifier>{1c7c5ba7-aaf7-4b84-a4e4-3e7b37ef7198}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="Math\Source Files">
-      <UniqueIdentifier>{7f34f5d1-bcab-4a1c-a92b-f0452be8b497}</UniqueIdentifier>
+    <Filter Include="GameObjects\Source Files">
+      <UniqueIdentifier>{25971b57-7c02-4c0b-9395-950c13f4f953}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
   </ItemGroup>
@@ -49,9 +49,6 @@
     <ClInclude Include="Keyboard.h">
       <Filter>Input\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Vector2.h">
-      <Filter>Math\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Screen.h">
       <Filter>Core\Header Files</Filter>
     </ClInclude>
@@ -60,6 +57,12 @@
     </ClInclude>
     <ClInclude Include="Mouse.h">
       <Filter>Input\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>GameObjects\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>GameObjects\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -80,6 +83,12 @@
     </ClCompile>
     <ClCompile Include="Mouse.cpp">
       <Filter>Input\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>GameObjects\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>GameObjects\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
