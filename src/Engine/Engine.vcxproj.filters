@@ -38,6 +38,17 @@
       <UniqueIdentifier>{25971b57-7c02-4c0b-9395-950c13f4f953}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="Render">
+      <UniqueIdentifier>{76ad83bb-5c67-447e-9eeb-6b020f7e63c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render\Header Files">
+      <UniqueIdentifier>{651576ef-3ef7-4b26-a9ef-4a20ba1657a9}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Render\Source Files">
+      <UniqueIdentifier>{8dc209ed-de08-4dea-94ab-e9a3cb8ce9f8}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SymphonyEngine.h">
@@ -46,23 +57,29 @@
     <ClInclude Include="WindowManager.h">
       <Filter>Core\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Keyboard.h">
-      <Filter>Input\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Screen.h">
       <Filter>Core\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameTimer.h">
       <Filter>Core\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Mouse.h">
-      <Filter>Input\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>GameObjects\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Transform.h">
       <Filter>GameObjects\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Keyboard.h">
+      <Filter>Input\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Mouse.h">
+      <Filter>Input\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Render\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Render\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -89,6 +106,12 @@
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
       <Filter>GameObjects\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Render\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Render\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

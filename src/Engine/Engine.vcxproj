@@ -86,8 +86,10 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameTimer.h" />
     <ClInclude Include="Keyboard.h" />
+    <ClInclude Include="Mesh.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="Screen.h" />
+    <ClInclude Include="Shader.h" />
     <ClInclude Include="SymphonyEngine.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="WindowManager.h" />
@@ -96,8 +98,10 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameTimer.cpp" />
     <ClCompile Include="Keyboard.cpp" />
+    <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Screen.cpp" />
+    <ClCompile Include="Shader.cpp" />
     <ClCompile Include="SymphonyEngine.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="WindowsManager.cpp" />

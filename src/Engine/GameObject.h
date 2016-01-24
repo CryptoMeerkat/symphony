@@ -32,11 +32,11 @@ namespace Symphony
         //TO-DO: figure out a way to implement this. Use a unique ID for each GameObject?
         //void RemoveChild(GameObject* c);
 
-        inline void SetPosition(glm::vec3& newPosition) { transform.position = newPosition; }
-        inline glm::vec3 GetPosition() const { return transform.position; }
+        inline void SetPosition(glm::vec3& newPosition) { transform.SetPosition(newPosition); }
+        inline glm::vec3 GetPosition() const { return transform.Position(); }
 
-        inline void SetScale(glm::vec3& newScale) { transform.scale = newScale; }
-        inline glm::vec3 GetScale() const { return transform.scale; }
+        /*inline void SetScale(glm::vec3& newScale) { transform.scale = newScale; }
+        inline glm::vec3 GetScale() const { return transform.scale; }*/
 
     protected:
         std::string name;
