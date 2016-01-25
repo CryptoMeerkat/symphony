@@ -23,10 +23,10 @@ namespace Symphony
         
         if (SymphonyEngine::GetMouse()->ButtonClicked(Mouse::Button::LEFT))
             std::cout << "Left was clicked" << std::endl;
-        if (SymphonyEngine::GetMouse()->ButtonHold(Mouse::Button::RIGHT))
-            std::cout << "Right is being hold" << std::endl;
         if (SymphonyEngine::GetMouse()->ButtonClicked(Mouse::Button::MIDDLE))
             std::cout << "Middle was clicked" << std::endl;
+        if (SymphonyEngine::GetMouse()->ButtonHold(Mouse::Button::RIGHT))
+            std::cout << "Right is being hold" << std::endl;
 
         if (SymphonyEngine::GetKeyboard()->GetKeyDown(SDL_SCANCODE_SPACE))
         {
@@ -45,5 +45,17 @@ namespace Symphony
 
     void Scene::Render()
     {
+        root->Render();
+    }
+
+    void Scene::AddGameObject(GameObject* newGameObject)
+    {
+        if (newGameObject)
+        {
+            root->AddChild(newGameObject);
+
+            //TO-DO: Find a better way to represent the root node in the scenes
+            newGameObject->SetParent(nullptr);
+        }
     }
 }

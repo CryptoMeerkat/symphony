@@ -20,7 +20,7 @@ namespace Symphony
         oglContextHandler = nullptr;
     }
 
-    bool WindowManager::Initialise(const char* windowsName, int initialWidth, int initialHeight, bool fullscreen, bool useVSync)
+    bool WindowManager::Initialise(const char* windowsName, int initialWidth, int initialHeight, bool fullscreen, bool useVSync, bool trapMouse)
     {
         Screen::SetResolution(initialWidth, initialHeight, fullscreen);
 
@@ -47,7 +47,8 @@ namespace Symphony
             SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
             //Trap the mouse
-            SDL_SetRelativeMouseMode(SDL_TRUE);
+            if (trapMouse)
+                SDL_SetRelativeMouseMode(SDL_TRUE);
 
             Uint32 windowsFlags = SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE;
             if (fullscreen) windowsFlags |= SDL_WINDOW_FULLSCREEN_DESKTOP; // SDL_WINDOW_FULLSCREEN; //SDL_WINDOW_FULLSCREEN_DESKTOP

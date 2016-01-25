@@ -1,7 +1,6 @@
 #pragma once
 
 #include <glm/vec3.hpp>
-#include <glm/mat3x3.hpp>
 #include <glm/gtc/quaternion.hpp>
 #include <glm/gtc/matrix_access.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -39,6 +38,17 @@ namespace Symphony
             localTransformMatrix = glm::rotate(localTransformMatrix, angles, axis);
         }
 
+        inline const glm::mat4x4& GetWorldMatrix() const { return worldTransformMatrix; }
+
+        inline void UpdateWorldMatrix(const glm::mat4x4& parentWorldMatrix)
+        {
+            worldTransformMatrix = parentWorldMatrix * localTransformMatrix;
+        }
+        
+        inline void UpdateWorldMatrix()
+        {
+            worldTransformMatrix = localTransformMatrix;
+        }
     protected:
         glm::mat4x4 localTransformMatrix, worldTransformMatrix;
     };

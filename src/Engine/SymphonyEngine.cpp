@@ -32,9 +32,9 @@ namespace Symphony
         delete windowManager;
     }
 
-    bool SymphonyEngine::InitialiseWindow(const char * windowsName, int initialWidth, int initialHeight, bool isFullscreen, bool useVSync)
+    bool SymphonyEngine::InitialiseWindow(const char * windowsName, int initialWidth, int initialHeight, bool isFullscreen, bool useVSync, bool trapMouse)
     {
-        if (!windowManager->Initialise(windowsName, initialWidth, initialHeight, isFullscreen, useVSync))
+        if (!windowManager->Initialise(windowsName, initialWidth, initialHeight, isFullscreen, useVSync, trapMouse))
         {
             std::cerr << "ERROR: Symphony failed to initialise a window using SDL 2!" << std::endl;
 
@@ -48,7 +48,7 @@ namespace Symphony
         const Uint8* keystate = SDL_GetKeyboardState(&numKeys);
         keyboard->Initialise(keystate, numKeys);
 
-        //LoadDefaultShaders();
+        LoadDefaultShaders();
 
         return true;
     }
@@ -167,14 +167,18 @@ namespace Symphony
         std::vector<std::string> attributes;
         std::vector<std::string> uniforms;
 
+        std::cout << "[Loading default shaders]" << std::endl;
+
         //Load default shaders
         attributes = { "position", "color" };
         uniforms = { "modelMatrix", "viewMatrix", "projMatrix" };
         Shader::AddDefaultShader(Shader::DefaultShaderName::UNLIT_COLOR, Shader::CreateNewShader("Shaders/Unlit/colored.vert", "Shaders/Unlit/colored.frag", attributes, uniforms));
         attributes.clear();
         uniforms.clear();
-    }
 
+        std::cout << std::endl << "[Finished loading default shaders]" << std::endl << std::endl;
+    }
+    
     void SymphonyEngine::Update(float deltaTime)
     {
         if (currentScene)
@@ -184,7 +188,12 @@ namespace Symphony
     void SymphonyEngine::Render()
     {
         if (currentScene)
+        {
             currentScene->Render();
+
+            //Update screen
+            windowManager->SwapBuffers();
+        }
     }
 
 }

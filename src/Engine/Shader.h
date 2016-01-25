@@ -9,7 +9,7 @@ namespace Symphony
     class Shader
     {
     public:
-        enum DefaultShaderName { UNLIT_COLOR, UNLIT_TEXTURE, MIRROR_WATER, DIFFUSE, BUMPED_DIFFUSE, SKYBOX, BLUR_SHADER };
+        enum DefaultShaderName { UNLIT_COLOR }; // , UNLIT_TEXTURE, MIRROR_WATER, DIFFUSE, BUMPED_DIFFUSE, SKYBOX, BLUR_SHADER };
 
         Shader();
         ~Shader();

@@ -34,6 +34,8 @@ namespace Symphony
             glBindVertexArray(0);
         }
 
+        void Render();
+
         static Mesh* Triangle();
 
     protected:

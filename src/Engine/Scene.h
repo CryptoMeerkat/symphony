@@ -17,6 +17,7 @@ namespace Symphony
         virtual void Render();
 
         unsigned int GetID() const { return id; }
+        void AddGameObject(GameObject* newGameObject);
 
     protected:
         unsigned int id;

@@ -84,6 +84,9 @@
     <ClInclude Include="Scene.h">
       <Filter>Core\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MeshRenderer.h">
+      <Filter>Render\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SymphonyEngine.cpp">

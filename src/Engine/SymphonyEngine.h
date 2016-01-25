@@ -13,7 +13,7 @@ namespace Symphony
     {
         public:
             bool InitialiseWindow(const char* windowsName, int initialWidth, int initialHeight,
-                                  bool isFullscreen = false, bool useVSync = true);
+                bool isFullscreen = false, bool useVSync = false, bool trapMouse = false);
             
             void Run();
 

@@ -17,7 +17,7 @@ namespace Symphony
         WindowManager();
         ~WindowManager();
 
-        bool Initialise(const char* windowsName, int initialWidth, int initialHeight, bool fullscreen, bool useVSync);
+        bool Initialise(const char* windowsName, int initialWidth, int initialHeight, bool fullscreen = false, bool useVSync = false, bool trapMouse = false);
 
         inline void SwapBuffers()
         {

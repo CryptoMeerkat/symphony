@@ -111,4 +111,22 @@ namespace Symphony
 
         glBindVertexArray(0);
     }
+
+    //TO-DO: Can this be const?
+    void Mesh::Render()
+    {
+        glBindVertexArray(vaoID);
+
+        if (vboID[INDEX_BUFFER])
+        {
+            glDrawElements(typeOfPrimitive, numberOfIndices, GL_UNSIGNED_INT, 0);
+        }
+        else
+        {
+            glDrawArrays(typeOfPrimitive, 0, numberOfVertices);
+        }
+
+        glBindVertexArray(0);
+        glBindTexture(GL_TEXTURE_2D, 0);
+    }
 }

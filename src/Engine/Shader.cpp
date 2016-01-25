@@ -56,7 +56,7 @@ namespace Symphony
         }
 
         //TO-DO: Should this consider Geomtry Shaders as well?
-        std::cout << (type == GL_VERTEX_SHADER ? "Vertex shader " : "Fragment shader ") << "compiled" << std::endl;
+        std::cout << (type == GL_VERTEX_SHADER ? "> Vertex shader " : "> Fragment shader ") << "compiled" << std::endl;
 
         _shaders[_totalShaders++] = shader;
 
@@ -96,7 +96,7 @@ namespace Symphony
             return false;
         }
 
-        std::cout << "Linking of the shaders was successful" << std::endl;
+        std::cout << std::endl << "> Linking of the shaders was successful" << std::endl;
 
         glDeleteShader(_shaders[VERTEX_SHADER]);
         glDeleteShader(_shaders[FRAGMENT_SHADER]);
@@ -139,7 +139,7 @@ namespace Symphony
     bool Shader::LoadFromFile(GLenum whichShader, const std::string& filename)
     {
         //TO-DO: Should this consider Geomtry Shaders as well?
-        std::cout << "Loading " << (whichShader == GL_VERTEX_SHADER ? "vertex shader (" : "fragment shader (") << filename << ")" << std::endl;
+        std::cout << std::endl << "> Loading " << (whichShader == GL_VERTEX_SHADER ? "vertex shader (" : "fragment shader (") << filename << ")" << std::endl;
 
         std::ifstream fp;
         fp.open(filename.c_str(), std::ios_base::in);
@@ -165,9 +165,7 @@ namespace Symphony
                                     std::vector<std::string> attributes, std::vector<std::string> uniforms)
     {
         Shader* newShader = new Shader();
-
-        std::cout << std::endl << std::endl;
-
+        
         //GL_CHECK_ERRORS
 
         //load the shader
