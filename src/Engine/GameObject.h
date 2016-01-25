@@ -12,8 +12,9 @@ namespace Symphony
         GameObject(Transform& t);
         virtual ~GameObject();
 
-        virtual void Update(float deltaTime);
-        virtual void Render();
+        //TO-DO: These two should be abstract
+        virtual void Update(float deltaTime) {};
+        virtual void Render() {};
 
         inline void SetName(const std::string& newName) { name = newName; }
         inline std::string Name() const { return name; }

@@ -1,10 +1,8 @@
 #pragma once
 
 #include <map>
-#include <string>
 #include <GLEW/GL/glew.h>
-
-using namespace std;
+#include <vector>
 
 namespace Symphony
 {
@@ -15,24 +13,22 @@ namespace Symphony
 
         Shader();
         ~Shader();
-
-        bool LoadFromString(GLenum whichShader, const string& source);
-        bool LoadFromFile(GLenum whichShader, const string& filename);
-        bool CreateAndLinkProgram();
+        
         void Use();
         void Release();
-        void AddAttribute(const string& attribute);
-        void AddUniform(const string& uniform);
+        bool CreateAndLinkProgram();
+        void AddUniform(const std::string& uniform);
+        void AddAttribute(const std::string& attribute);
 
         //An indexer that returns the location of the attribute/uniform
-        GLuint operator[](const string& attribute);
-        GLuint operator()(const string& uniform);
+        GLuint operator[](const std::string& attribute);
+        GLuint operator()(const std::string& uniform);
 
         GLuint ProgramID() { return _program; }
 
         void DeleteShaderProgram();
 
-        bool HasUniform(string uniform)
+        bool HasUniform(std::string uniform)
         {
             if (_uniformLocationList.find(uniform) == _uniformLocationList.end())
                 return false;
@@ -40,12 +36,15 @@ namespace Symphony
             return true;
         }
 
-        static void AddShader(DefaultShaderName typeOfShader, Shader* shaderObj)
+        static Shader* CreateNewShader(std::string vertexShaderFilename, std::string fragmentShaderFilename,
+                                       std::vector<std::string> attributes, std::vector<std::string> uniforms);
+
+        static void AddDefaultShader(DefaultShaderName typeOfShader, Shader* shaderObj)
         {
             defaultShaders[typeOfShader] = shaderObj;
         }
 
-        static Shader* GetShader(DefaultShaderName typeOfShader)
+        static Shader* GetDefaultShader(DefaultShaderName typeOfShader)
         {
             if (defaultShaders.find(typeOfShader) == defaultShaders.end())
                 return nullptr;
@@ -58,9 +57,12 @@ namespace Symphony
         GLuint _program;
         int _totalShaders;
         GLuint _shaders[3]; //0: vertex shader, 1: fragment shader, 2: geometry shader
-        map<string, GLuint> _attributeList;
-        map<string, GLuint> _uniformLocationList;
+        std::map<std::string, GLuint> _attributeList;
+        std::map<std::string, GLuint> _uniformLocationList;
 
-        static map<DefaultShaderName, Shader*> defaultShaders;
+        bool LoadFromString(GLenum whichShader, const std::string& source);
+        bool LoadFromFile(GLenum whichShader, const std::string& filename);
+
+        static std::map<DefaultShaderName, Shader*> defaultShaders;
     };
 }

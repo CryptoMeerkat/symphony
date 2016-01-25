@@ -3,6 +3,8 @@
 #include <iostream>
 #include <sstream>
 #include "Screen.h"
+#include <vector>
+#include "Shader.h"
 
 namespace Symphony
 {
@@ -18,6 +20,8 @@ namespace Symphony
         keyboard        = new Keyboard();
         mouse           = new Mouse();
         gameLoopIsActive = true;
+
+        currentScene = nullptr;
     }
 
     SymphonyEngine::~SymphonyEngine()
@@ -44,6 +48,8 @@ namespace Symphony
         const Uint8* keystate = SDL_GetKeyboardState(&numKeys);
         keyboard->Initialise(keystate, numKeys);
 
+        //LoadDefaultShaders();
+
         return true;
     }
 
@@ -62,6 +68,8 @@ namespace Symphony
         float frameStartTime, frameEndTime = 0.0f, frameTotalTime;
         float nextTimeLap = frameEndTime + 1.0f;
         std::stringstream ss;
+
+        NextScene();
 
         //While application is running
         while (gameLoopIsActive)
@@ -154,12 +162,29 @@ namespace Symphony
         SDL_Quit();
     }
 
+    void SymphonyEngine::LoadDefaultShaders()
+    {
+        std::vector<std::string> attributes;
+        std::vector<std::string> uniforms;
+
+        //Load default shaders
+        attributes = { "position", "color" };
+        uniforms = { "modelMatrix", "viewMatrix", "projMatrix" };
+        Shader::AddDefaultShader(Shader::DefaultShaderName::UNLIT_COLOR, Shader::CreateNewShader("Shaders/Unlit/colored.vert", "Shaders/Unlit/colored.frag", attributes, uniforms));
+        attributes.clear();
+        uniforms.clear();
+    }
+
     void SymphonyEngine::Update(float deltaTime)
     {
+        if (currentScene)
+            currentScene->Update(deltaTime);
     }
 
     void SymphonyEngine::Render()
     {
+        if (currentScene)
+            currentScene->Render();
     }
 
 }

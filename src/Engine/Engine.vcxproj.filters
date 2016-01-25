@@ -81,6 +81,9 @@
     <ClInclude Include="Shader.h">
       <Filter>Render\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Core\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SymphonyEngine.cpp">
@@ -112,6 +115,9 @@
     </ClCompile>
     <ClCompile Include="Shader.cpp">
       <Filter>Render\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Core\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
