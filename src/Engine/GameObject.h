@@ -35,7 +35,7 @@ namespace Symphony
         //void RemoveChild(GameObject* c);
 
         inline void SetPosition(glm::vec3& newPosition) { transform.SetPosition(newPosition); }
-        inline glm::vec3 GetPosition() const { return transform.Position(); }
+        inline glm::vec3 GetPosition() const { return transform.GetPosition(); }
 
         /*inline void SetScale(glm::vec3& newScale) { transform.scale = newScale; }
         inline glm::vec3 GetScale() const { return transform.scale; }*/
@@ -46,6 +46,8 @@ namespace Symphony
         //TO-DO: Should attributes like the parent be public?
         inline GameObject* GetParent() const { return parent; }
         inline void SetParent(GameObject* newParent) { parent = newParent; }
+
+        inline Transform* GetTransform() { return &transform; }
 
     protected:
         std::string name;

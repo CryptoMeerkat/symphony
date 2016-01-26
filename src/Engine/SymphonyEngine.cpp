@@ -189,6 +189,9 @@ namespace Symphony
     {
         if (currentScene)
         {
+            //clear the colour and depth buffer
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            
             currentScene->Render();
 
             //Update screen

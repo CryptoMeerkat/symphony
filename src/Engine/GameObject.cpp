@@ -1,6 +1,9 @@
 #include "GameObject.h"
-#include <glm/gtc/type_ptr.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
 #include <iostream>
+#include <string>
+#include "SymphonyEngine.h"
 //TO-DO: <algorithm> is required for the correct use of std::remove used in RemoveChild;
 //       find a way to avoid using this.
 //#include <algorithm>
@@ -42,9 +45,45 @@ namespace Symphony
     void GameObject::Update(float deltaTime)
     {
         if (parent)
-            transform.UpdateWorldMatrix(parent->transform.GetWorldMatrix());// GetWorldTransformMatrix());
+            transform.UpdateWorldMatrix(parent->transform.GetWorldMatrix());
         else
             transform.UpdateWorldMatrix();
+
+        if (meshRenderer && meshRenderer->OkToRender())
+        {
+            if (SymphonyEngine::GetKeyboard()->GetKeyHold(SDL_SCANCODE_RIGHT))
+            {
+                glm::vec3 r = glm::vec3(0, 45, 0) * deltaTime;
+                transform.Rotate(r);
+            }
+            else if (SymphonyEngine::GetKeyboard()->GetKeyHold(SDL_SCANCODE_LEFT))
+            {
+                glm::vec3 r = glm::vec3(0, -45, 0) * deltaTime;
+                transform.Rotate(r);
+            }
+            if (SymphonyEngine::GetKeyboard()->GetKeyHold(SDL_SCANCODE_UP))
+            {
+                glm::vec3 r = glm::vec3(45, 0, 0) * deltaTime;
+                transform.Rotate(r);
+            }
+            else if (SymphonyEngine::GetKeyboard()->GetKeyHold(SDL_SCANCODE_DOWN))
+            {
+                glm::vec3 r = glm::vec3(-45, 0, 0) * deltaTime;
+                transform.Rotate(r);
+            }
+            if (SymphonyEngine::GetKeyboard()->GetKeyHold(SDL_SCANCODE_LCTRL))
+            {
+                glm::vec3 r = glm::vec3(0, 0, 45) * deltaTime;
+                transform.Rotate(r);
+            }
+            else if (SymphonyEngine::GetKeyboard()->GetKeyHold(SDL_SCANCODE_RCTRL))
+            {
+                glm::vec3 r = glm::vec3(0, 0, -45) * deltaTime;
+                transform.Rotate(r);
+            }
+        }
+
+        std::cout << std::endl << "Object: " << name << std::endl << transform << std::endl;
 
         for (GameObject* go : children)
         {

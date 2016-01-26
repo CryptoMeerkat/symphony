@@ -19,7 +19,8 @@ namespace Symphony
 
     void Scene::Update(float deltaTime)
     {
-        //root->Update(deltaTime);
+        std::cout << "==== NEW UPDATE ====" << std::endl;
+        root->Update(deltaTime);
         
         if (SymphonyEngine::GetMouse()->ButtonClicked(Mouse::Button::LEFT))
             std::cout << "Left was clicked" << std::endl;
@@ -32,10 +33,12 @@ namespace Symphony
         {
             std::cout << "Space pressed" << std::endl;
         }
+
         if (SymphonyEngine::GetKeyboard()->GetKeyUp(SDL_SCANCODE_SPACE))
         {
             std::cout << "Space lifted" << std::endl;
         }
+
         if (SymphonyEngine::GetKeyboard()->GetKeyUp(SDL_SCANCODE_N))
         {
             SymphonyEngine::Instance()->NextScene();

@@ -53,6 +53,7 @@ namespace Symphony
                     return instance;
 
                 instance = new SymphonyEngine();
+                return instance;
             }
             
             //Provide global access to release/delete this class

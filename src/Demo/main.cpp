@@ -15,9 +15,14 @@ void LoadTestScene()
     engine->AddScene(firstScene);
 
     GameObject* triangle = new GameObject();
+    firstScene->AddGameObject(triangle);
+
     triangle->SetName("Triangle");
     triangle->ModifyMeshRenderer(Mesh::Triangle(), Shader::GetDefaultShader(Shader::DefaultShaderName::UNLIT_COLOR));
-    firstScene->AddGameObject(triangle);
+    
+    //auto tt = triangle->GetTransform();
+    //tt->Translate(glm::vec3(0.5f, 0, 0));
+    //tt->Rotate(glm::vec3(0, 45, 0));
 
     /*Transform go = Transform();
     std::cout << "Before: " << glm::to_string(go.Position()) << std::endl;
@@ -38,7 +43,7 @@ int main(int argc, char* args[])
         return -1;
     }
     
-    if (!engine->InitialiseWindow("Symphony: Test mode", 800, 600, false, true, true))
+    if (!engine->InitialiseWindow("Symphony: Test mode", 800, 600, false, true, false))
         return -1;
         
     LoadTestScene();
