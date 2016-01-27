@@ -2,18 +2,18 @@
 
 #include <iostream>
 #include <glm/vec3.hpp>
-#include <glm/gtc/quaternion.hpp>
+//#include <glm/gtc/quaternion.hpp>
 #include <glm/gtx/quaternion.hpp>
-#include <glm/gtc/matrix_access.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
 namespace Symphony
 {
     class Transform
     {
-        //friend class GameObject;
+        friend class GameObject;
+        
     public:
-
+        
         Transform();
         ~Transform();
 
@@ -132,6 +132,7 @@ namespace Symphony
 
         #pragma endregion
         
+
         friend std::ostream& operator<<(std::ostream& os, const Transform& obj);
 
     protected:

@@ -65,8 +65,8 @@ namespace Symphony
         bool buttonState[Button::MAX];
         bool buttonHoldState[Button::MAX];
         bool buttonClickState[Button::MAX];
-
-        float sensitivity = 0.25f;
+        
+        float sensitivity = 0.005f; //0.25f
         
         //The mouse destructor and constructor should be protected 
         //and only manageable by a friend class as anyone could just

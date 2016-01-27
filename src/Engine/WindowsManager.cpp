@@ -36,15 +36,22 @@ namespace Symphony
         }
         else
         {
+            //TO-DO: Read this https://wiki.libsdl.org/SDL_GL_SetAttribute
+
             //Use OpenGL 3.3 core
+            //TO-DO: Further investigate what OpenGL version will be used by default
             SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
             SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
             SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+
+            //TO-DO: Further investigate this option
+            //SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
 
 
             /* Turn on double buffering with a 24bit Z buffer.
             * You may need to change this to 16 or 32 for your system */
             SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+            //SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 
             //Trap the mouse
             if (trapMouse)

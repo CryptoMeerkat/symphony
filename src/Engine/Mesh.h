@@ -36,7 +36,11 @@ namespace Symphony
 
         void Render();
 
+        void Colorize(glm::vec4 newColor);
+        void Colorize(glm::vec4* newColors, int numberOfColors);
+
         static Mesh* Triangle();
+        static Mesh* Quad();
 
     protected:
         GLuint  vaoID,
@@ -47,9 +51,9 @@ namespace Symphony
 
         GLuint*       indices;
         glm::vec3*    normals;
+        glm::vec3*    tangents;
         glm::vec3*    vertices;
         glm::vec4*    colours;
-
 
         void BufferData();
     };

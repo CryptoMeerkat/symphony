@@ -106,10 +106,11 @@ namespace Symphony
                             break;
 
                         Screen::SetResolution(e.window.data1, e.window.data2);
-
+                        
+                        //TO-DO: Update all cameras in the current scene
                         /*if (camera)
                             camera->AdaptToResize(e.window.data1, e.window.data2);*/
-
+                        if (currentScene) currentScene->UpdateCameras(e.window.data1, e.window.data2);
                     }
                 }
             }

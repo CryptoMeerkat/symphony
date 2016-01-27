@@ -19,7 +19,7 @@ namespace Symphony
 
     void Scene::Update(float deltaTime)
     {
-        std::cout << "==== NEW UPDATE ====" << std::endl;
+        //std::cout << "==== NEW UPDATE ====" << std::endl;
         root->Update(deltaTime);
         
         if (SymphonyEngine::GetMouse()->ButtonClicked(Mouse::Button::LEFT))
@@ -48,7 +48,11 @@ namespace Symphony
 
     void Scene::Render()
     {
-        root->Render();
+        for (Camera* cam : cameras)
+        {
+            cam->LoadRenderPreferences();
+            root->Render(cam->BuildViewMatrix(), cam->GetProjectionMatrix());
+        }
     }
 
     void Scene::AddGameObject(GameObject* newGameObject)

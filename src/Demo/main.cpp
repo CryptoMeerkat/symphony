@@ -1,9 +1,10 @@
 #pragma comment(lib, "SymphonyEngine.lib")
 
 #include <iostream>
-#include "glm/ext.hpp"
+//#include "glm/ext.hpp"
 #include "../Engine/SymphonyEngine.h"
-#include "../Engine/Transform.h"
+#include "../Engine/PerspectiveCamera.h"
+#include "../Engine/Color.h"
 
 using namespace Symphony;
 
@@ -14,21 +15,27 @@ void LoadTestScene()
     Scene* firstScene = new Scene();
     engine->AddScene(firstScene);
 
+    Transform* t = nullptr;
+    
+    PerspectiveCamera* camera = new PerspectiveCamera(Color::Red(), 1.f, 1000.f, 45.f, Screen::AspectRatio());
+    firstScene->AddGameObject(camera);
+    firstScene->RegisterCamera(camera);
+    t = camera->GetTransform();
+    t->SetRotation(glm::vec3(0, 180.f, 0));
+
     GameObject* triangle = new GameObject();
     firstScene->AddGameObject(triangle);
-
+    
     triangle->SetName("Triangle");
     triangle->ModifyMeshRenderer(Mesh::Triangle(), Shader::GetDefaultShader(Shader::DefaultShaderName::UNLIT_COLOR));
     
-    //auto tt = triangle->GetTransform();
-    //tt->Translate(glm::vec3(0.5f, 0, 0));
-    //tt->Rotate(glm::vec3(0, 45, 0));
+    t = triangle->GetTransform();
+    t->Translate(glm::vec3(0.f, 0, 3.f));
 
-    /*Transform go = Transform();
-    std::cout << "Before: " << glm::to_string(go.Position()) << std::endl;
-    go.SetPosition(glm::vec3(-1, -5, 500));
-    go.Translate(glm::vec3(10, 1, 4));
-    std::cout << "After: " << glm::to_string(go.Position()) << std::endl;*/
+    auto mr = triangle->GetMeshRenderer();
+    mr->mesh->Colorize(Color::Yellow());
+    glm::vec4 colors[3]{ Color::Red() , Color::Green() ,Color::Blue() };
+    mr->mesh->Colorize(colors, 3);
 }
 
 int main(int argc, char* args[])
@@ -42,10 +49,10 @@ int main(int argc, char* args[])
         std::cerr << "Symphony Engine couldn't be created. The application will quit." << std::endl;
         return -1;
     }
-    
-    if (!engine->InitialiseWindow("Symphony: Test mode", 800, 600, false, true, false))
+
+    if (!engine->InitialiseWindow("Symphony: Test mode", 800, 600, false, true, true))
         return -1;
-        
+
     LoadTestScene();
     
     engine->Run();

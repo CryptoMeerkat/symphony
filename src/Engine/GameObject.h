@@ -15,7 +15,7 @@ namespace Symphony
 
         //TO-DO: These two should be abstract
         virtual void Update(float deltaTime);
-        virtual void Render();
+        virtual void Render(glm::mat4& viewMatrix, glm::mat4& projMatrix);
 
         inline void SetName(const std::string& newName) { name = newName; }
         inline std::string Name() const { return name; }

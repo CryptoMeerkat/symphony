@@ -44,8 +44,8 @@ namespace Symphony
         //std::cout << "Left state: " << buttonState[Button::LEFT] << std::endl;
         //std::cout << "Left hold state: " << buttonHoldState[Button::LEFT] << std::endl;
 
-        relativePosition.x = relativeX;// -absolutePosition.x;
-        relativePosition.y = relativeY;// -absolutePosition.y;
+        relativePosition.x = relativeX; // -absolutePosition.x;
+        relativePosition.y = relativeY; // -absolutePosition.y;
         relativePosition *= sensitivity;
 
         absolutePosition.x = absoluteX;

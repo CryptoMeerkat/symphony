@@ -49,7 +49,7 @@ namespace Symphony
         else
             transform.UpdateWorldMatrix();
 
-        if (meshRenderer && meshRenderer->OkToRender())
+        /*if (meshRenderer && meshRenderer->OkToRender())
         {
             if (SymphonyEngine::GetKeyboard()->GetKeyHold(SDL_SCANCODE_RIGHT))
             {
@@ -81,9 +81,13 @@ namespace Symphony
                 glm::vec3 r = glm::vec3(0, 0, -45) * deltaTime;
                 transform.Rotate(r);
             }
+            if (SymphonyEngine::GetKeyboard()->GetKeyHold(SDL_SCANCODE_R))
+            {
+                transform.SetRotation(glm::vec3(0, 0, 0));
+            }
         }
 
-        std::cout << std::endl << "Object: " << name << std::endl << transform << std::endl;
+        std::cout << std::endl << "Object: " << name << std::endl << transform << std::endl;*/
 
         for (GameObject* go : children)
         {
@@ -92,15 +96,15 @@ namespace Symphony
         }
     }
     
-    void GameObject::Render()
+    void GameObject::Render(glm::mat4& viewMatrix, glm::mat4& projMatrix)
     {
         if (meshRenderer && meshRenderer->OkToRender())
         {
             (*meshRenderer->shader).Use();
             glm::mat4 identity;
 
-            glUniformMatrix4fv((*meshRenderer->shader)("viewMatrix"), 1, GL_FALSE, glm::value_ptr(identity));
-            glUniformMatrix4fv((*meshRenderer->shader)("projMatrix"), 1, GL_FALSE, glm::value_ptr(identity));
+            glUniformMatrix4fv((*meshRenderer->shader)("viewMatrix"), 1, GL_FALSE, glm::value_ptr(viewMatrix));
+            glUniformMatrix4fv((*meshRenderer->shader)("projMatrix"), 1, GL_FALSE, glm::value_ptr(projMatrix));
 
             glUniformMatrix4fv((*meshRenderer->shader)("modelMatrix"), 1, GL_FALSE, glm::value_ptr(transform.GetWorldMatrix()));
             meshRenderer->Render();
@@ -110,7 +114,7 @@ namespace Symphony
         for (GameObject* go : children)
         {
             if (go->isEnabled)
-                go->Render();
+                go->Render(viewMatrix, projMatrix);
         }
     }
 
