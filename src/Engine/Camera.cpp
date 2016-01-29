@@ -3,7 +3,6 @@
 #include <glm/gtc/matrix_access.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/transform.hpp>
-#include "SymphonyEngine.h"
 
 namespace Symphony
 {
@@ -18,9 +17,9 @@ namespace Symphony
 
     Camera::Camera(glm::vec4 clearColor, float nPlane, float zPlane, ViewPort vPort)
     {
-        nearPlane = DEFAULT_ZNEAR;
-        farPlane = DEFAULT_ZFAR;
-        clearColor = DEFAULT_CLEAR_COLOR;
+        nearPlane = nPlane;
+        farPlane = zPlane;
+        this->clearColor = clearColor;
         viewPort = vPort;
 
         useAlphaBlending = false;
@@ -95,11 +94,5 @@ namespace Symphony
                 glCullFace(GL_FRONT_AND_BACK);
                 break;
         }
-    }
-    
-    void Camera::Update(float deltaTime)
-    {
-        transform.Rotate(glm::vec3(-1, 0, 0) * SymphonyEngine::GetMouse()->RelativePosition().y);
-        transform.Rotate(glm::vec3(0, -1, 0) * SymphonyEngine::GetMouse()->RelativePosition().x);
     }
 }

@@ -15,11 +15,11 @@ namespace Symphony
         Camera(glm::vec4 clearColor, float nPlane, float zPlane, ViewPort vPort = ViewPort::FullScreen());
         virtual ~Camera() {};
         
-        virtual void Update(float deltaTime);
-
+        virtual void Update(float deltaTime) = 0;
+        
+        inline float Pitch() { return transform.GetRotation().x; }
         inline float Yaw() { return transform.GetRotation().y; }
         inline float Roll() { return transform.GetRotation().z; }
-        inline float Pitch() { return transform.GetRotation().x; }
         
         inline void DisableFaceCulling()
         { typeOfFaceculling = FaceCulling::NONE; }

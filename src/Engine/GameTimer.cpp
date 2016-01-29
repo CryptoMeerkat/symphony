@@ -21,11 +21,11 @@ namespace Symphony
         return (float)((t.QuadPart - start.QuadPart) * div1000ByFreq); // 1000.0 / frequency.QuadPart);
     }
 
-    float GameTimer::GetDeltaTime()
+    float GameTimer::GetTimedMS()
     {
         float a = GetMS();
         float b = a - lastTime;
         lastTime = a;
-        return b / 1000.0f;
+        return b;
     }
 }

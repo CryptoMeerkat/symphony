@@ -23,8 +23,12 @@ namespace Symphony
             float GetMS();
 
             //How many milliseconds have passed since GetTimedMS was last called
-            float GetDeltaTime();
+            float GetTimedMS();
 
+            inline float GetDeltaTime()
+            {
+                return GetTimedMS() / 1000.0f;
+            }
 
         protected:
             LARGE_INTEGER    start;            //Start of timer

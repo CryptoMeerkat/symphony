@@ -7,6 +7,7 @@ namespace Symphony
     Transform::Transform()
     {
         scale = glm::vec3(1.f);
+        SetRotation(glm::vec3());
         localTransformNeedsUpdate = true;
     }
 

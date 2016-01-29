@@ -17,25 +17,40 @@ void LoadTestScene()
 
     Transform* t = nullptr;
     
-    PerspectiveCamera* camera = new PerspectiveCamera(Color::Red(), 1.f, 1000.f, 45.f, Screen::AspectRatio());
+    PerspectiveCamera* camera = new PerspectiveCamera(Color::Grey(), 1.f, 1000.f, 45.f, Screen::AspectRatio());
     firstScene->AddGameObject(camera);
     firstScene->RegisterCamera(camera);
     t = camera->GetTransform();
-    t->SetRotation(glm::vec3(0, 180.f, 0));
-
-    GameObject* triangle = new GameObject();
-    firstScene->AddGameObject(triangle);
+    //t->Translate(glm::vec3(0.f, 0.f, 0.f));
+    //t->Rotate(glm::vec3(0, 90.f, 0));
     
-    triangle->SetName("Triangle");
-    triangle->ModifyMeshRenderer(Mesh::Triangle(), Shader::GetDefaultShader(Shader::DefaultShaderName::UNLIT_COLOR));
-    
-    t = triangle->GetTransform();
-    t->Translate(glm::vec3(0.f, 0, 3.f));
+    GameObject* triangles[4];
+    glm::vec4 colors[4]{ Color::Red(), Color::Green(), Color::Blue(), Color::Yellow() };
+    for (size_t i = 0; i < 4; ++i)
+    {
+        triangles[i] = new GameObject();
+        firstScene->AddGameObject(triangles[i]);
+        
+        triangles[i]->SetName("Triangle");
+        triangles[i]->ModifyMeshRenderer(Mesh::Triangle(), Shader::GetDefaultShader(Shader::DefaultShaderName::UNLIT_COLOR));
 
-    auto mr = triangle->GetMeshRenderer();
-    mr->mesh->Colorize(Color::Yellow());
-    glm::vec4 colors[3]{ Color::Red() , Color::Green() ,Color::Blue() };
-    mr->mesh->Colorize(colors, 3);
+        float x = 0, y = 0, rot = 0;
+        switch (i)
+        {
+            case 0: x = 0; y = -5.f; rot = 0.f; break;
+            case 1: x = -5.f; y = 0; rot = 270.f; break;
+            case 2: x = 0; y = 5.f; rot = 180.f; break;
+            case 3: x = 5.f; y = 0; rot = 90.f; break;
+        }
+        t = triangles[i]->GetTransform();
+        t->Translate(glm::vec3(x, 0.f, y));
+        t->Rotate(glm::vec3(0.f, rot, 0.f));
+
+        auto mr = triangles[i]->GetMeshRenderer();
+        mr->mesh->Colorize(colors[i]);
+        /*glm::vec4 colors[3]{ Color::Red() , Color::Green(), Color::Blue() };
+        mr->mesh->Colorize(colors, 3);*/
+    }
 }
 
 int main(int argc, char* args[])
@@ -50,7 +65,7 @@ int main(int argc, char* args[])
         return -1;
     }
 
-    if (!engine->InitialiseWindow("Symphony: Test mode", 800, 600, false, true, true))
+    if (!engine->InitialiseWindow("Symphony: Test mode", 800, 600, false, true, false))
         return -1;
 
     LoadTestScene();

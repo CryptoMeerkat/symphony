@@ -5,6 +5,7 @@
 //#include <glm/gtc/quaternion.hpp>
 #include <glm/gtx/quaternion.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtx/transform.hpp>
 
 namespace Symphony
 {
@@ -22,13 +23,13 @@ namespace Symphony
 
         inline glm::vec3 GetPosition() const { return position; }
 
-        inline void SetPosition(glm::vec3 newPosition)
+        inline void SetPosition(glm::vec3& newPosition)
         {
             position = newPosition;
             localTransformNeedsUpdate = true;
         }
 
-        inline void Translate(glm::vec3 deltaPosition)
+        inline void Translate(glm::vec3& deltaPosition)
         {
             position += deltaPosition;
             localTransformNeedsUpdate = true;
@@ -41,13 +42,13 @@ namespace Symphony
 
         inline glm::vec3 GetScale() const { return scale; }
 
-        inline void SetScale(glm::vec3 newScale) 
+        inline void SetScale(glm::vec3& newScale) 
         {
             scale = newScale;
             localTransformNeedsUpdate = true;
         }
 
-        inline void Scale(glm::vec3 deltaScale)
+        inline void Scale(glm::vec3& deltaScale)
         {
             scale.x *= deltaScale.x;
             scale.y *= deltaScale.y;
@@ -66,31 +67,30 @@ namespace Symphony
 
         #pragma region Rotation
 
+        inline glm::quat GetOrientation()
+        {
+            return orientation;
+        }
+
         inline glm::vec3 GetRotation()
         {
             return eulerRotation;
         }
 
-        inline void SetRotation(glm::vec3 newRotation)
+        inline void SetRotation(glm::vec3& newRotation)
         {
             eulerRotation = newRotation;
-            orientation = glm::quat(eulerRotation);
+            ClampRotations();
+
+            //TO-DO: This could be done only when the local transform will be updated
+            orientation = glm::quat(glm::radians(eulerRotation));
             localTransformNeedsUpdate = true;
         }
-
-        inline void Rotate(glm::vec3 deltaRotation)
+        
+        inline void Rotate(glm::vec3& deltaRotation)
         {
             eulerRotation += deltaRotation;
-
-            if (eulerRotation.x > 360.f) eulerRotation.x -= 360.0f;
-            else if (eulerRotation.x < -360.f) eulerRotation.x += 360.0f;
-
-            if (eulerRotation.y > 360.f) eulerRotation.y -= 360.0f;
-            else if (eulerRotation.y < -360.f) eulerRotation.y += 360.0f;
-
-            if (eulerRotation.z > 360.f) eulerRotation.z -= 360.0f;
-            else if (eulerRotation.z < -360.f) eulerRotation.z += 360.0f;
-
+            ClampRotations();
             orientation = glm::quat(glm::radians(eulerRotation));
             localTransformNeedsUpdate = true;
         }
@@ -104,9 +104,9 @@ namespace Symphony
         {
             if (localTransformNeedsUpdate)
             {
-                localTransformMatrix = glm::translate(uniformMatrix, position)
+                localTransformMatrix = glm::translate(position)
                                      * glm::toMat4(orientation) //* glm::mat4_cast(orientation); //TO-DO: Check which one is better
-                                     * glm::scale(uniformMatrix, scale);
+                                     * glm::scale(scale);
 
                 localTransformNeedsUpdate = false;
             }
@@ -147,5 +147,17 @@ namespace Symphony
         glm::quat orientation;
 
         bool localTransformNeedsUpdate;
+        
+        void ClampRotations()
+        {
+            if (eulerRotation.x > 360.f) eulerRotation.x -= 360.0f;
+            else if (eulerRotation.x < -360.f) eulerRotation.x += 360.0f;
+
+            if (eulerRotation.y > 360.f) eulerRotation.y -= 360.0f;
+            else if (eulerRotation.y < -360.f) eulerRotation.y += 360.0f;
+
+            if (eulerRotation.z > 360.f) eulerRotation.z -= 360.0f;
+            else if (eulerRotation.z < -360.f) eulerRotation.z += 360.0f;
+        }
     };
 }

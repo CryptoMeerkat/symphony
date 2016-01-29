@@ -5,8 +5,8 @@
 #pragma comment(lib, "GLEW/glew32.lib")
 #pragma comment(lib, "opengl32.lib")
 
-#include <GLEW\GL\glew.h>
 #include <SDL2\SDL.h>
+#include <GLEW\GL\glew.h>
 #include <SDL2\SDL_opengl.h>
 
 namespace Symphony
